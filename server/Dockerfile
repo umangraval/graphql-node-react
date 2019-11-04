@@ -1,8 +1,8 @@
 FROM node:10
 WORKDIR /server
-COPY package*.json ./server
+COPY package*.json /server/
 RUN npm install
-COPY . ./server
+COPY . /server
 EXPOSE 4000
 CMD ["npm","start"]
 
