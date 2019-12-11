@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {graphql} from 'react-apollo';
 import {flowRight as compose} from 'lodash';
 import {getAuthorQuery} from '../queries/queries';
-import {addbookmutation} from '../queries/queries';
+import {addbookmutation,getBooksQuery} from '../queries/queries';
 
 
 class AddBook extends Component{
@@ -31,9 +31,10 @@ class AddBook extends Component{
         this.props.addbookmutation({
             variables:{
                 name:this.state.name,
-                gender:this.state.genre,
+                genre:this.state.genre,
                 authorid:this.state.authorid
-            }
+            },
+            refetchQueries:[{query:getBooksQuery}]
         });
     }
 
@@ -52,7 +53,7 @@ class AddBook extends Component{
 
                 <div className="field">
                     <label>Author:</label>
-                    <select onChange={(e)=> this.setState({authorid:e.target.value })}>
+                    <select onChange={(e)=> this.setState({authorId:e.target.value })}>
                         {this.displayAuthors()}
                     </select>
                 </div>
